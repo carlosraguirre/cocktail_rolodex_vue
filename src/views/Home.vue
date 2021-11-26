@@ -3,9 +3,11 @@
     <h1>{{ message }}</h1>
       <div v-for="cocktail in cocktails">
         <p>{{ cocktail.cocktail_name}}</p>
-        <p>{{ cocktail.ingredient}}</p>
-        <p>{{ cocktail.direction}}</p>
-        <p>{{ cocktail.recipe_link}}</p>
+        <ul style="list-style: none;">
+          <li>{{ cocktail.ingredient}}</li>
+          <li>{{ cocktail.direction}}</li>
+          <li>{{ cocktail.recipe_link}}</li>
+        </ul>        
         </br>
         <hr>
         </br>
