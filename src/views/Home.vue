@@ -1,6 +1,15 @@
 <template>
   <div class="home">
     <h1>{{ message }}</h1>
+      <div v-for="cocktail in cocktails">
+        <p>{{ cocktail.cocktail_name}}</p>
+        <p>{{ cocktail.ingredient}}</p>
+        <p>{{ cocktail.direction}}</p>
+        <p>{{ cocktail.recipe_link}}</p>
+        </br>
+        <hr>
+        </br>
+      </div>
   </div>
 </template>
 
@@ -21,7 +30,7 @@
     methods: {
       cocktailsIndex: function () {
         console.log("in cocktails index");
-        axios.get("http://localhost:3000/cocktails").then((response) => {
+        axios.get("/cocktails").then((response) => {
           console.log(response.data);
           this.cocktails = response.data;
         });
