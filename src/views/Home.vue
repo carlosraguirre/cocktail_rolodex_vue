@@ -4,10 +4,10 @@
       <div v-for="cocktail in cocktails">
         <p>{{ cocktail.cocktail_name}}</p>
         <ul style="list-style: none;">
-          <li>{{ cocktail.ingredient}}</li>
-          <li>{{ cocktail.direction}}</li>
-          <li>{{ cocktail.recipe_link}}</li>
-        </ul>        
+          <li>{{ cocktail.ingredient }}</li>
+          <li>{{ cocktail.direction }}</li>
+          <a v-bind:href="cocktail.recipe_link">Link to Recipe</a>
+        </ul>
         </br>
         <hr>
         </br>
@@ -23,11 +23,13 @@
     data: function () {
       return {
         message: "Welcome to Vue.js!",
-        cocktails: []
+        cocktails: [],
+        // splitedStrings: "",
       };
     },
     created: function () {
       this.cocktailsIndex();
+      // this.stringSplit();
     },
     methods: {
       cocktailsIndex: function () {
@@ -36,7 +38,10 @@
           console.log(response.data);
           this.cocktails = response.data;
         });
-      }
+      },
+      // stringSplit: function () {
+      //   this.splitedStrings = this.cocktails.split("\n")
+      // }
     },
   };
 </script>
