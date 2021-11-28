@@ -2,10 +2,12 @@
   <div class="home">
     <!-- src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.15/vue.js"   -->
     <div v-for="cocktail in cocktails">
-      <p>{{ cocktail.cocktail_name}}</p>
+      <h2>{{ cocktail.cocktail_name}}</h2>
       <div id="app">
+        <h4>Ingredients</h4>
         <div class="pre-formatted">{{ cocktail.ingredient }}</div>
         </br>
+        <h4>Directions</h4>
         <div class="pre-formatted">{{ cocktail.direction }}</div>
         <a v-bind:href="cocktail.recipe_link">Link to Recipe</a>
       </div>        
@@ -33,7 +35,6 @@
     },
     created: function () {
       this.cocktailsIndex();
-      // this.stringSplit();
     },
     methods: {
       cocktailsIndex: function () {
