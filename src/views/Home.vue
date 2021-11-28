@@ -1,6 +1,16 @@
 <template>
   <div class="home">
     <!-- src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.15/vue.js"   -->
+    <div>
+      <p>Add a Cocktail Recipe</p>
+      <p><button v-on:click="cocktailCreate()">Add a cocktail recipe</button></p>
+      <dialog id="cocktail-details">
+        <form method="dialog">
+          <p>Cocktail Name: <input type="text" v-model="newCocktailParams.cocktail_name"></p>
+        </form>
+      </dialog>
+    </div>
+    <hr>
     <div v-for="cocktail in cocktails">
       <h2>{{ cocktail.cocktail_name}}</h2>
       <div id="app">
@@ -31,6 +41,7 @@
     data: function () {
       return {
         cocktails: [],
+        newCocktailParams: {}
       };
     },
     created: function () {
@@ -44,6 +55,21 @@
           this.cocktails = response.data;
         });
       },
+      cocktailCreate: function () {
+        console.log("create cocktail");
+        var cocktailParams = {
+          cocktail_name: this.newCocktailParams.cocktail_name,
+          ingredient: this.newCocktailParams.ingredient,
+          direction: this.newCocktailParams.direction,
+          recipe_link: this.newCocktailParams.recipe_link,
+        };
+        axios.post("/cocktails", cocktailParams).then((response) => {
+          console.log(response.data);
+          this.cocktails.push(response.data);
+          this.newCocktailParams = {};
+          document.querySelector("#cocktail-details").showModal();
+        });
+      }
     },
   };
 </script>
