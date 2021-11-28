@@ -1,30 +1,34 @@
 <template>
   <div class="home">
-    <h1>{{ message }}</h1>
-      <div v-for="cocktail in cocktails">
-        <p>{{ cocktail.cocktail_name}}</p>
-        <ul style="list-style: none;">
-          <li>{{ cocktail.ingredient }}</li>
-          <li>{{ cocktail.direction }}</li>
-          <a v-bind:href="cocktail.recipe_link">Link to Recipe</a>
-        </ul>
+    <!-- src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.15/vue.js"   -->
+    <div v-for="cocktail in cocktails">
+      <p>{{ cocktail.cocktail_name}}</p>
+      <div id="app">
+        <div class="pre-formatted">{{ cocktail.ingredient }}</div>
         </br>
-        <hr>
-        </br>
-      </div>
+        <div class="pre-formatted">{{ cocktail.direction }}</div>
+        <a v-bind:href="cocktail.recipe_link">Link to Recipe</a>
+      </div>        
+      </br>
+      <hr>
+      </br>
+    </div>
   </div>
 </template>
 
-<style></style>
+<style>
+.pre-formatted {
+  white-space: pre;
+}
+</style>
 
 <script>
   import axios from "axios";
   export default {
+    // el: "#app",
     data: function () {
       return {
-        message: "Welcome to Vue.js!",
         cocktails: [],
-        // splitedStrings: "",
       };
     },
     created: function () {
@@ -39,9 +43,6 @@
           this.cocktails = response.data;
         });
       },
-      // stringSplit: function () {
-      //   this.splitedStrings = this.cocktails.split("\n")
-      // }
     },
   };
 </script>
