@@ -7,6 +7,9 @@
       <dialog id="cocktail-details">
         <form method="dialog">
           <p>Cocktail Name: <input type="text" v-model="newCocktailParams.cocktail_name"></p>
+          <p>Cocktail Ingredients: <input type="text" v-model="newCocktailParams.ingredient"></p>
+          <p>Cocktail Directions: <input type="text" v-model="newCocktailParams.direction"></p>
+          <p>Link to Cocktail Recipe: <input type="text" v-model="newCocktailParams.recipe_link"></p>
         </form>
       </dialog>
     </div>
