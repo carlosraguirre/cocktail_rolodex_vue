@@ -14,7 +14,7 @@
         </form>
       </dialog>
     </div>
-    <hr>
+    <hr style="width:50%">
     <div v-for="cocktail in cocktails">
       <h2>{{ cocktail.cocktail_name}}</h2>
       <div id="app">
@@ -26,7 +26,7 @@
         <a v-bind:href="cocktail.recipe_link">Link to Recipe</a>
       </div>        
       </br>
-      <hr>
+      <hr style="width:50%">
       </br>
     </div>
   </div>
