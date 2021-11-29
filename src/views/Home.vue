@@ -1,5 +1,26 @@
 <template>
-  <div>  
+  <div>
+    <!-- New Modal -->
+    <div id="app">
+      <h1>Vue Modal Tutorial</h1>
+      <button @click="openModal" v-if="!showModal">Open Modal</button>
+      <Modal v-if="showModal" :showModal=showModal @clicked="onChildClick">
+        <div slot="header">
+          <h3 class="modal-title">
+            CodeMix
+          </h3>
+        </div>
+        <div slot="body">
+          <p>
+            <p>Cocktail Name: <input type="text" v-model="newCocktailParams.cocktail_name"></p>
+            <p>Cocktail Ingredients: <input type="text" v-model="newCocktailParams.ingredient"></p>
+            <p>Cocktail Directions: <input type="text" v-model="newCocktailParams.direction"></p>
+            <p>Link to Cocktail Recipe: <input type="text" v-model="newCocktailParams.recipe_link"></p>
+          </p>
+        </div>
+      </Modal>
+    </div>
+
     <div>
       <p>Add a Cocktail Recipe</p>
       <p><button v-on:click="cocktailCreate()">Add a cocktail recipe</button></p>
@@ -14,10 +35,10 @@
         </form>
       </dialog>
     </div>
-    <hr style="width:50%">
+    <hr style="width:60%">
     <div v-for="cocktail in cocktails">
       <h2>{{ cocktail.cocktail_name}}</h2>
-      <div id="app">
+      <div id="original">
         <h4>Ingredients</h4>
         <div class="pre-formatted">{{ cocktail.ingredient }}</div>
         </br>
@@ -26,7 +47,7 @@
         <a v-bind:href="cocktail.recipe_link">Link to Recipe</a>
       </div>        
       </br>
-      <hr style="width:50%">
+      <hr style="width:60%">
       </br>
     </div>
   </div>
@@ -51,6 +72,7 @@
       return {
         cocktails: [],
         newCocktailParams: {},
+        showModal: false
       };
     },
     created: function () {
@@ -78,7 +100,13 @@
           this.newCocktailParams = {};
           document.querySelector("#cocktail-details").showModal();
         });
-      },     
+      },
+      openModal() {
+        this.showModal = true;
+      },
+      onChildClick() {
+        this.showModal = false;
+      }
     },
   };
 </script>
