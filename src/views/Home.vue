@@ -1,6 +1,5 @@
 <template>
-  <div class="home">
-    <!-- src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.15/vue.js"   -->
+  <div>  
     <div>
       <p>Add a Cocktail Recipe</p>
       <p><button v-on:click="cocktailCreate()">Add a cocktail recipe</button></p>
@@ -10,6 +9,8 @@
           <p>Cocktail Ingredients: <input type="text" v-model="newCocktailParams.ingredient"></p>
           <p>Cocktail Directions: <input type="text" v-model="newCocktailParams.direction"></p>
           <p>Link to Cocktail Recipe: <input type="text" v-model="newCocktailParams.recipe_link"></p>
+          <p><button v-on:click="cocktailCreate()">Add a cocktail recipe</button></p>
+          <p><button>Close</button></p>
         </form>
       </dialog>
     </div>
@@ -38,13 +39,18 @@
 </style>
 
 <script>
+  import Modal from "@/components/Modal.vue";
   import axios from "axios";
+
   export default {
     // el: "#app",
+    components: { 
+      Modal
+    },
     data: function () {
       return {
         cocktails: [],
-        newCocktailParams: {}
+        newCocktailParams: {},
       };
     },
     created: function () {
@@ -72,7 +78,7 @@
           this.newCocktailParams = {};
           document.querySelector("#cocktail-details").showModal();
         });
-      }
+      },     
     },
   };
 </script>
