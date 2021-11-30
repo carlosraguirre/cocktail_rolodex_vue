@@ -79,10 +79,7 @@
           this.newCocktailParams = {};
           // document.querySelector("#cocktail-details").showModal();
         });
-        this.close();
-      },
-      close: function () {
-        this.$emit("close");
+        this.isOpen=false;
       },
     },
   };
