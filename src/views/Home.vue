@@ -8,11 +8,11 @@
           <div class="overlay" @click.self="isOpen = false;">
             <div class="modal">
               <h1>Modal heading</h1>
-              <p>Cocktail Name: <input type="text" v-model="newCocktailParams.cocktail_name"></p>
-              <p>Cocktail Ingredients: <input type="text" v-model="newCocktailParams.ingredient"></p>
-              <p>Cocktail Directions: <input type="text" v-model="newCocktailParams.direction"></p>
-              <p>Link to Cocktail Recipe: <input type="text" v-model="newCocktailParams.recipe_link"></p>
-              <p><button v-on:click="cocktailCreate()">Add to rolodex</button></p>              
+              <p><input type="text" v-model="newCocktailParams.cocktail_name" placeholder="Name"></p>
+              <p><textarea v-model="newCocktailParams.ingredient" placeholder="Ingredients"></textarea></p>
+              <p><textarea type="text" v-model="newCocktailParams.direction" placeholder="Directions"></textarea></p>
+              <p><input type="text" v-model="newCocktailParams.recipe_link" placeholder="Link to Recipe"></p>
+              <button v-on:click="cocktailCreate()">Add to rolodex</button>              
             </div>
           </div>
         </div>
