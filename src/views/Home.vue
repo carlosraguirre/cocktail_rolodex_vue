@@ -5,7 +5,7 @@
     <div>
       <transition name="modal">
         <div v-if="isOpen">
-          <div class="overlay" @click.self="isOpen = false;">
+          <div class="overlay" v-on:click.self="isOpen = false;">
             <div class="modal">
               <h1>Add Cocktail</h1>
               <p><input type="text" v-model="newCocktailParams.cocktail_name" placeholder="Name"></p>
@@ -17,7 +17,7 @@
           </div>
         </div>
       </transition>
-      <button @click="isOpen = !isOpen;">
+      <button v-on:click="isOpen = !isOpen;">
         {{ isOpen ? "Close" : "Add Cocktail Recipe" }}
       </button>
     </div>
@@ -97,7 +97,7 @@
   margin: 0px auto;
   padding: 20px;
   background-color: #fff;
-  border-radius: 2px;
+  border-radius: 7px;
   box-shadow: 0 2px 8px 3px;
   transition: all 0.2s ease-in;
   font-family: Helvetica, Arial, sans-serif;
