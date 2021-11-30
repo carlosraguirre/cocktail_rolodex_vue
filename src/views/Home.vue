@@ -7,7 +7,7 @@
         <div v-if="isOpen">
           <div class="overlay" @click.self="isOpen = false;">
             <div class="modal">
-              <h1>Modal heading</h1>
+              <h1>Add Cocktail</h1>
               <p><input type="text" v-model="newCocktailParams.cocktail_name" placeholder="Name"></p>
               <p><textarea v-model="newCocktailParams.ingredient" placeholder="Ingredients"></textarea></p>
               <p><textarea type="text" v-model="newCocktailParams.direction" placeholder="Directions"></textarea></p>
@@ -79,6 +79,10 @@
           this.newCocktailParams = {};
           // document.querySelector("#cocktail-details").showModal();
         });
+        this.close();
+      },
+      close: function () {
+        this.$emit("close");
       },
     },
   };
