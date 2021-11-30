@@ -1,41 +1,30 @@
 <template>
-  <div>
-    <!-- New Modal -->
-    <div id="app">
-      <h1>Vue Modal Tutorial</h1>
-      <button @click="openModal" v-if="!showModal">Open Modal</button>
-      <Modal v-if="showModal" :showModal=showModal @clicked="onChildClick">
-        <div slot="header">
-          <h3 class="modal-title">
-            CodeMix
-          </h3>
+  <div id="app">
+    
+    <!-- Modal -->
+    <div>
+      <transition name="modal">
+        <div v-if="isOpen">
+          <div class="overlay" @click.self="isOpen = false;">
+            <div class="modal">
+              <h1>Modal heading</h1>
+              <p>Cocktail Name: <input type="text" v-model="newCocktailParams.cocktail_name"></p>
+              <p>Cocktail Ingredients: <input type="text" v-model="newCocktailParams.ingredient"></p>
+              <p>Cocktail Directions: <input type="text" v-model="newCocktailParams.direction"></p>
+              <p>Link to Cocktail Recipe: <input type="text" v-model="newCocktailParams.recipe_link"></p>
+              <p><button v-on:click="cocktailCreate()">Add to rolodex</button></p>              
+            </div>
+          </div>
         </div>
-        <div slot="body">
-          <p>
-            <p>Cocktail Name: <input type="text" v-model="newCocktailParams.cocktail_name"></p>
-            <p>Cocktail Ingredients: <input type="text" v-model="newCocktailParams.ingredient"></p>
-            <p>Cocktail Directions: <input type="text" v-model="newCocktailParams.direction"></p>
-            <p>Link to Cocktail Recipe: <input type="text" v-model="newCocktailParams.recipe_link"></p>
-          </p>
-        </div>
-      </Modal>
+      </transition>
+      <button @click="isOpen = !isOpen;">
+        {{ isOpen ? "Close" : "Add Cocktail Recipe" }}
+      </button>
     </div>
 
-    <div>
-      <p>Add a Cocktail Recipe</p>
-      <p><button v-on:click="cocktailCreate()">Add a cocktail recipe</button></p>
-      <dialog id="cocktail-details">
-        <form method="dialog">
-          <p>Cocktail Name: <input type="text" v-model="newCocktailParams.cocktail_name"></p>
-          <p>Cocktail Ingredients: <input type="text" v-model="newCocktailParams.ingredient"></p>
-          <p>Cocktail Directions: <input type="text" v-model="newCocktailParams.direction"></p>
-          <p>Link to Cocktail Recipe: <input type="text" v-model="newCocktailParams.recipe_link"></p>
-          <p><button v-on:click="cocktailCreate()">Add a cocktail recipe</button></p>
-          <p><button>Close</button></p>
-        </form>
-      </dialog>
-    </div>
     <hr style="width:60%">
+
+    <!-- Cocktails Index -->
     <div v-for="cocktail in cocktails">
       <h2>{{ cocktail.cocktail_name}}</h2>
       <div id="original">
@@ -44,6 +33,7 @@
         </br>
         <h4>Directions</h4>
         <div class="pre-formatted">{{ cocktail.direction }}</div>
+        </br>
         <a v-bind:href="cocktail.recipe_link">Link to Recipe</a>
       </div>        
       </br>
@@ -53,26 +43,15 @@
   </div>
 </template>
 
-<style>
-.pre-formatted {
-  white-space: pre;
-}
-</style>
-
 <script>
-  import Modal from "@/components/Modal.vue";
   import axios from "axios";
 
   export default {
-    // el: "#app",
-    components: { 
-      Modal
-    },
     data: function () {
       return {
         cocktails: [],
         newCocktailParams: {},
-        showModal: false
+        isOpen: false
       };
     },
     created: function () {
@@ -98,15 +77,63 @@
           console.log(response.data);
           this.cocktails.push(response.data);
           this.newCocktailParams = {};
-          document.querySelector("#cocktail-details").showModal();
+          // document.querySelector("#cocktail-details").showModal();
         });
       },
-      openModal() {
-        this.showModal = true;
-      },
-      onChildClick() {
-        this.showModal = false;
-      }
     },
   };
 </script>
+
+<style>
+.pre-formatted {
+  white-space: pre;
+}
+.modal {
+  width: 500px;
+  margin: 0px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px 3px;
+  transition: all 0.2s ease-in;
+  font-family: Helvetica, Arial, sans-serif;
+}
+.fadeIn-enter {
+  opacity: 0;
+}
+
+.fadeIn-leave-active {
+  opacity: 0;
+  transition: all 0.2s step-end;
+}
+
+.fadeIn-enter .modal,
+.fadeIn-leave-active.modal {
+  transform: scale(1.1);
+}
+button {
+  background-color: #04AA6D;
+  border: none;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  border-radius: 10px
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background: #00000094;
+  z-index: 999;
+  transition: opacity 0.2s ease;
+}
+</style>
