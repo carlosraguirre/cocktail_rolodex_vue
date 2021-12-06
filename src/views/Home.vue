@@ -1,7 +1,6 @@
 <template>
   <div id="app">
-    
-    <!-- Modal -->
+    <!-- Add Recipe -->
     <div>
       <transition name="modal">
         <div v-if="isOpen">
@@ -12,7 +11,7 @@
               <p><textarea v-model="newCocktailParams.ingredient" placeholder="Ingredients"></textarea></p>
               <p><textarea type="text" v-model="newCocktailParams.direction" placeholder="Directions"></textarea></p>
               <p><input type="text" v-model="newCocktailParams.recipe_link" placeholder="Link to Recipe"></p>
-              <button v-on:click="cocktailCreate()">Add to rolodex</button>              
+              <button v-on:click="cocktailCreate()">Add to rolodex</button>
             </div>
           </div>
         </div>
@@ -21,7 +20,6 @@
         {{ isOpen ? "Close" : "Add Cocktail Recipe" }}
       </button>
     </div>
-
     <hr style="width:60%">
 
     <!-- Cocktails Index -->
@@ -35,7 +33,26 @@
         <div class="pre-formatted">{{ cocktail.direction }}</div>
         </br>
         <a v-bind:href="cocktail.recipe_link">Link to Recipe</a>
-      </div>        
+      </div>
+      <!-- Edit Recipe -->
+      <div>
+        <transition name="modal">
+          <div v-if="isOpen">
+            <div class="overlay" v-on:click.self="isOpen = false;">
+              <div class="modal">
+                <p><input type="text" v-model="editCocktailParams.cocktail_name" placeholder="Name"></p>
+                <p><textarea v-model="editCocktailParams.ingredient" placeholder="Ingredients"></textarea></p>
+                <p><textarea type="text" v-model="editCocktailParams.direction" placeholder="Directions"></textarea></p>
+                <p><input type="text" v-model="editCocktailParams.recipe_link" placeholder="Link to Recipe"></p>
+                <button v-on:click="updateCocktail()">Edit Recipe</button>
+              </div>
+            </div>
+          </div>
+        </transition>
+        <button v-on:click="isOpen = !isOpen;">
+          {{ isOpen ? "Close" : "Edit Recipe" }}
+        </button>
+      </div>
       </br>
       <hr style="width:60%">
       </br>
@@ -51,7 +68,8 @@
       return {
         cocktails: [],
         newCocktailParams: {},
-        isOpen: false
+        isOpen: false,
+        editCocktailParams: {}
       };
     },
     created: function () {
@@ -81,6 +99,13 @@
         });
         this.isOpen=false;
       },
+      updateCocktail: function() {
+        console.log("updating Cocktail");
+        axios.patch(`/cocktails/${this.params.id}`, this.editCocktailParams).then(response => {
+          console.log(response.data);
+          this.$router.push("/cocktails");
+        });
+      }
     },
   };
 </script>
