@@ -35,7 +35,7 @@
         <a v-bind:href="cocktail.recipe_link">Link to Recipe</a>
       </div>
       <!-- Edit Recipe -->
-      <div>
+      <!-- <div>
         <transition name="modal">
           <div v-if="isOpen">
             <div class="overlay" v-on:click.self="isOpen = false;">
@@ -52,7 +52,7 @@
         <button v-on:click="isOpen = !isOpen;">
           {{ isOpen ? "Close" : "Edit Recipe" }}
         </button>
-      </div>
+      </div> -->
       </br>
       <hr style="width:60%">
       </br>
@@ -69,7 +69,7 @@
         cocktails: [],
         newCocktailParams: {},
         isOpen: false,
-        editCocktailParams: {}
+        // editCocktailParams: {}
       };
     },
     created: function () {
@@ -99,13 +99,13 @@
         });
         this.isOpen=false;
       },
-      updateCocktail: function() {
-        console.log("updating Cocktail");
-        axios.patch(`/cocktails/${this.params.id}`, this.editCocktailParams).then(response => {
-          console.log(response.data);
-          this.$router.push("/cocktails");
-        });
-      }
+      // updateCocktail: function() {
+      //   console.log("updating Cocktail");
+      //   axios.patch(`/cocktails/${this.params.id}`, this.editCocktailParams).then(response => {
+      //     console.log(response.data);
+      //     this.$router.push("/cocktails");
+      //   });
+      // }
     },
   };
 </script>
