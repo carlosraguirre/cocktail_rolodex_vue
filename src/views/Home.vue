@@ -34,6 +34,11 @@
         </br>
         <a v-bind:href="cocktail.recipe_link">Link to Recipe</a>
       </div>
+
+      <!-- Delete Button -->
+      <div>
+        <button v-on:click="destroyCocktail(currentCocktail)">Delete Recipe</button>
+      </div>
       <!-- Edit Recipe -->
       <!-- <div>
         <transition name="modal">
@@ -69,7 +74,8 @@
         cocktails: [],
         newCocktailParams: {},
         isOpen: false,
-        // editCocktailParams: {}
+        // editCocktailParams: {},
+        currentCocktail: {}
       };
     },
     created: function () {
@@ -105,7 +111,14 @@
       //     console.log(response.data);
       //     this.$router.push("/cocktails");
       //   });
-      // }
+      // },
+      destroyCocktail: function(cocktail) {
+        axios.delete("/cocktails/" + cocktail.id).then((response) => {
+          console.log(response.data);
+          var index = this.cocktails.indexOf(cocktail);
+          this.cocktails.splice(index, 1);
+        });
+      }
     },
   };
 </script>
