@@ -43,7 +43,7 @@
       <div>
         <transition name="modal">
           <div v-if="isEditModalOpen">
-            <div class="overlay" v-on:click.self="isOpen = false;">
+            <div class="overlay" v-on:click.self="isEditModalOpen = false;">
               <div class="modal">
                 <p><input type="text" v-model="editCocktailParams.cocktail_name" placeholder="Name"></p>
                 <p><textarea v-model="editCocktailParams.ingredient" placeholder="Ingredients"></textarea></p>
@@ -177,7 +177,7 @@ button {
   align-items: center;
   width: 100%;
   height: 100%;
-  background: #00000094;
+  background: whitesmoke;
   z-index: 999;
   transition: opacity 0.2s ease;
 }
