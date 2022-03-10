@@ -3,21 +3,21 @@
     <!-- Add Recipe -->
     <div>
       <transition name="modal">
-        <div v-if="isOpen">
-          <div class="overlay" v-on:click.self="isOpen = false;">
+        <div v-if="isAddModalOpen">
+          <div class="overlay" v-on:click.self="isAddModalOpen = false;">
             <div class="modal">
               <h1>Add Cocktail</h1>
               <p><input type="text" v-model="newCocktailParams.cocktail_name" placeholder="Name"></p>
               <p><textarea v-model="newCocktailParams.ingredient" placeholder="Ingredients"></textarea></p>
               <p><textarea type="text" v-model="newCocktailParams.direction" placeholder="Directions"></textarea></p>
               <p><input type="text" v-model="newCocktailParams.recipe_link" placeholder="Link to Recipe"></p>
-              <button v-on:click="cocktailCreate()">Add to rolodex</button>
+              <button v-on:click="cocktailCreate()">Add recipe</button>
             </div>
           </div>
         </div>
       </transition>
-      <button v-on:click="isOpen = !isOpen;">
-        {{ isOpen ? "Close" : "Add Cocktail Recipe" }}
+      <button v-on:click="isAddModalOpen = !isAddModalOpen;">
+        {{ isAddModalOpen ? "Close" : "Add Cocktail Recipe" }}
       </button>
     </div>
     <hr style="width:60%">
@@ -49,7 +49,7 @@
                 <p><textarea v-model="editCocktailParams.ingredient" placeholder="Ingredients"></textarea></p>
                 <p><textarea type="text" v-model="editCocktailParams.direction" placeholder="Directions"></textarea></p>
                 <p><input type="text" v-model="editCocktailParams.recipe_link" placeholder="Link to Recipe"></p>
-                <button v-on:click="updateCocktail()">Save Changes</button>
+                <button v-on:click="updateCocktail()">Save changes</button>
               </div>
             </div>
           </div>
@@ -73,7 +73,7 @@
       return {
         cocktails: [],
         newCocktailParams: {},
-        isOpen: false,
+        isAddModalOpen: false,
         editCocktailParams: {},
         isEditModalOpen: false
       };
@@ -103,7 +103,7 @@
           this.newCocktailParams = {};
           // document.querySelector("#cocktail-details").showModal();
         });
-        this.isOpen=false;
+        this.isAddModalOpen=false;
       },
       updateCocktail: function() {
         console.log("updating Cocktail");
