@@ -37,7 +37,7 @@
 
       <!-- Delete Button -->
       <div>
-        <button v-on:click="destroyCocktail(currentCocktail)">Delete Recipe</button>
+        <button v-on:click="destroyCocktail(cocktail)">Delete Recipe</button>
       </div>
       <!-- Edit Recipe -->
       <!-- <div>
@@ -113,6 +113,7 @@
       //   });
       // },
       destroyCocktail: function(cocktail) {
+        console.log(cocktail);
         axios.delete("/cocktails/" + cocktail.id).then((response) => {
           console.log(response.data);
           var index = this.cocktails.indexOf(cocktail);
