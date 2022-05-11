@@ -1,5 +1,14 @@
 <template>
   <div id="app">
+    <!-- Search Bar -->
+    <!-- <div>
+      <input class="form-control" type="text" v-model="filterValue" placeholder="search cocktails">
+      <button v-on:click="filter()">Search</button>
+      <div v-for ="cocktail in filterCocktails">
+        <h5>{{ cocktail.cocktail_name }}</h5>
+      </div>
+    </div> -->
+
     <!-- Add Recipe -->
     <div>
       <transition name="modal">
@@ -75,11 +84,14 @@
         newCocktailParams: {},
         isAddModalOpen: false,
         editCocktailParams: {},
-        isEditModalOpen: false
+        isEditModalOpen: false,
+        filterCocktails: {},
+        filterValue: ""
       };
     },
     created: function () {
       this.cocktailsIndex();
+      // this.filter();
     },
     methods: {
       cocktailsIndex: function () {
@@ -124,6 +136,15 @@
         console.log(cocktail);
         this.editCocktailParams = cocktail
         this.isEditModalOpen = !this.isEditModalOpen;
+      },
+      filter: function () {
+        console.log(this.filterValue)
+        this.filterCocktails = []
+        this.cocktails.forEach(cocktail => {
+          if (cocktail.cocktail_name.includes(this.filterValue)) {
+            this.filterCocktails.push(cocktail)
+          }
+        });
       }
     },
   };
