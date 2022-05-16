@@ -11,6 +11,9 @@
 
     <!-- Add Recipe -->
     <div>
+      <AddRecipe />
+    </div>
+    <!-- <div>
       <transition name="modal">
         <div v-if="isAddModalOpen">
           <div class="overlay" v-on:click.self="isAddModalOpen = false;">
@@ -28,7 +31,7 @@
       <button v-on:click="isAddModalOpen = !isAddModalOpen;">
         {{ isAddModalOpen ? "Close" : "Add Cocktail Recipe" }}
       </button>
-    </div>
+    </div> -->
     <hr style="width:60%">
 
     <!-- Cocktails Index -->
@@ -76,17 +79,21 @@
 
 <script>
   import axios from "axios";
+  import AddRecipe from '@/components/AddRecipe.vue'
 
   export default {
+    components: {
+      AddRecipe
+    },
     data: function () {
       return {
         cocktails: [],
-        newCocktailParams: {},
-        isAddModalOpen: false,
+        // newCocktailParams: {},
+        // isAddModalOpen: false,
         editCocktailParams: {},
         isEditModalOpen: false,
-        filterCocktails: {},
-        filterValue: ""
+        // filterCocktails: {},
+        // filterValue: ""
       };
     },
     created: function () {
@@ -101,22 +108,22 @@
           this.cocktails = response.data;
         });
       },
-      cocktailCreate: function () {
-        console.log("create cocktail");
-        var cocktailParams = {
-          cocktail_name: this.newCocktailParams.cocktail_name,
-          ingredient: this.newCocktailParams.ingredient,
-          direction: this.newCocktailParams.direction,
-          recipe_link: this.newCocktailParams.recipe_link,
-        };
-        axios.post("/cocktails", cocktailParams).then((response) => {
-          console.log(response.data);
-          this.cocktails.push(response.data);
-          this.newCocktailParams = {};
-          // document.querySelector("#cocktail-details").showModal();
-        });
-        this.isAddModalOpen=false;
-      },
+      // cocktailCreate: function () {
+      //   console.log("create cocktail");
+      //   var cocktailParams = {
+      //     cocktail_name: this.newCocktailParams.cocktail_name,
+      //     ingredient: this.newCocktailParams.ingredient,
+      //     direction: this.newCocktailParams.direction,
+      //     recipe_link: this.newCocktailParams.recipe_link,
+      //   };
+      //   axios.post("/cocktails", cocktailParams).then((response) => {
+      //     console.log(response.data);
+      //     this.cocktails.push(response.data);
+      //     this.newCocktailParams = {};
+      //     // document.querySelector("#cocktail-details").showModal();
+      //   });
+      //   this.isAddModalOpen=false;
+      // },
       updateCocktail: function() {
         console.log("updating Cocktail");
         axios.patch(`/cocktails/${this.editCocktailParams.id}`, this.editCocktailParams).then(response => {
@@ -137,15 +144,15 @@
         this.editCocktailParams = cocktail
         this.isEditModalOpen = !this.isEditModalOpen;
       },
-      filter: function () {
-        console.log(this.filterValue)
-        this.filterCocktails = []
-        this.cocktails.forEach(cocktail => {
-          if (cocktail.cocktail_name.includes(this.filterValue)) {
-            this.filterCocktails.push(cocktail)
-          }
-        });
-      }
+      // filter: function () {
+      //   console.log(this.filterValue)
+      //   this.filterCocktails = []
+      //   this.cocktails.forEach(cocktail => {
+      //     if (cocktail.cocktail_name.includes(this.filterValue)) {
+      //       this.filterCocktails.push(cocktail)
+      //     }
+      //   });
+      // }
     },
   };
 </script>
@@ -158,16 +165,13 @@
   text-align: center;
   color: #2c3e50;
 }
-
 #nav {
   padding: 30px;
 }
-
 #nav a {
   font-weight: bold;
   color: #2c3e50;
 }
-
 #nav a.router-link-exact-active {
   color: #42b983;
 }
@@ -187,12 +191,10 @@
 .fadeIn-enter {
   opacity: 0;
 }
-
 .fadeIn-leave-active {
   opacity: 0;
   transition: all 0.2s step-end;
 }
-
 .fadeIn-enter .modal,
 .fadeIn-leave-active.modal {
   transform: scale(1.1);
