@@ -35,7 +35,7 @@
     <hr style="width:60%">
 
     <!-- Cocktails Index -->
-    <div v-for="cocktail in cocktails">
+    <!-- <div v-for="cocktail in cocktails">
       <h2>{{ cocktail.cocktail_name}}</h2>
       <div id="original">
         <h4>Ingredients</h4>
@@ -45,11 +45,12 @@
         <div class="pre-formatted">{{ cocktail.direction }}</div>
         </br>
         <a v-bind:href="cocktail.recipe_link">Link to Recipe</a>
-      </div>
+      </div> -->
 
       <!-- Delete Button -->
       <div>
-        <button v-on:click="destroyCocktail(cocktail)">Delete Recipe</button>
+        <IndexRecipes />
+        <!-- <button v-on:click="destroyCocktail(cocktail)">Delete Recipe</button> -->
       </div>
       <!-- Edit Recipe -->
       <div>
@@ -80,14 +81,16 @@
 <script>
   import axios from "axios";
   import AddRecipe from '@/components/AddRecipe.vue'
+  import IndexRecipes from '@/components/IndexRecipes.vue'
 
   export default {
     components: {
-      AddRecipe
+      AddRecipe,
+      IndexRecipes
     },
     data: function () {
       return {
-        cocktails: [],
+        // cocktails: [],
         // newCocktailParams: {},
         // isAddModalOpen: false,
         editCocktailParams: {},
@@ -96,18 +99,18 @@
         // filterValue: ""
       };
     },
-    created: function () {
-      this.cocktailsIndex();
-      // this.filter();
-    },
+    // created: function () {
+    //   this.cocktailsIndex();
+    //   // this.filter();
+    // },
     methods: {
-      cocktailsIndex: function () {
-        console.log("in cocktails index");
-        axios.get("/cocktails").then((response) => {
-          console.log(response.data);
-          this.cocktails = response.data;
-        });
-      },
+      // cocktailsIndex: function () {
+      //   console.log("in cocktails index");
+      //   axios.get("/cocktails").then((response) => {
+      //     console.log(response.data);
+      //     this.cocktails = response.data;
+      //   });
+      // },
       // cocktailCreate: function () {
       //   console.log("create cocktail");
       //   var cocktailParams = {
@@ -131,14 +134,14 @@
           this.isEditModalOpen = !this.isEditModalOpen;
         });
       },
-      destroyCocktail: function(cocktail) {
-        console.log(cocktail);
-        axios.delete("/cocktails/" + cocktail.id).then((response) => {
-          console.log(response.data);
-          var index = this.cocktails.indexOf(cocktail);
-          this.cocktails.splice(index, 1);
-        });
-      },
+      // destroyCocktail: function(cocktail) {
+      //   console.log(cocktail);
+      //   axios.delete("/cocktails/" + cocktail.id).then((response) => {
+      //     console.log(response.data);
+      //     var index = this.cocktails.indexOf(cocktail);
+      //     this.cocktails.splice(index, 1);
+      //   });
+      // },
       editModalOpen: function (cocktail) {
         console.log(cocktail);
         this.editCocktailParams = cocktail
