@@ -53,7 +53,7 @@
         <!-- <button v-on:click="destroyCocktail(cocktail)">Delete Recipe</button> -->
       </div>
       <!-- Edit Recipe -->
-      <div>
+      <!-- <div>
         <transition name="modal">
           <div v-if="isEditModalOpen">
             <div class="overlay" v-on:click.self="isEditModalOpen = false;">
@@ -70,7 +70,7 @@
         <button v-on:click="editModalOpen(cocktail)">
           {{ isEditModalOpen ? "Close" : "Edit Recipe" }}
         </button>
-      </div>
+      </div> -->
       </br>
       <hr style="width:60%">
       </br>
@@ -93,8 +93,8 @@
         // cocktails: [],
         // newCocktailParams: {},
         // isAddModalOpen: false,
-        editCocktailParams: {},
-        isEditModalOpen: false,
+        // editCocktailParams: {},
+        // isEditModalOpen: false,
         // filterCocktails: {},
         // filterValue: ""
       };
@@ -127,13 +127,13 @@
       //   });
       //   this.isAddModalOpen=false;
       // },
-      updateCocktail: function() {
-        console.log("updating Cocktail");
-        axios.patch(`/cocktails/${this.editCocktailParams.id}`, this.editCocktailParams).then(response => {
-          console.log(response.data);
-          this.isEditModalOpen = !this.isEditModalOpen;
-        });
-      },
+      // updateCocktail: function() {
+      //   console.log("updating Cocktail");
+      //   axios.patch(`/cocktails/${this.editCocktailParams.id}`, this.editCocktailParams).then(response => {
+      //     console.log(response.data);
+      //     this.isEditModalOpen = !this.isEditModalOpen;
+      //   });
+      // },
       // destroyCocktail: function(cocktail) {
       //   console.log(cocktail);
       //   axios.delete("/cocktails/" + cocktail.id).then((response) => {
@@ -142,11 +142,11 @@
       //     this.cocktails.splice(index, 1);
       //   });
       // },
-      editModalOpen: function (cocktail) {
-        console.log(cocktail);
-        this.editCocktailParams = cocktail
-        this.isEditModalOpen = !this.isEditModalOpen;
-      },
+      // editModalOpen: function (cocktail) {
+      //   console.log(cocktail);
+      //   this.editCocktailParams = cocktail
+      //   this.isEditModalOpen = !this.isEditModalOpen;
+      // },
       // filter: function () {
       //   console.log(this.filterValue)
       //   this.filterCocktails = []

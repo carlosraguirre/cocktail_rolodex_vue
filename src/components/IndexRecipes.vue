@@ -13,7 +13,8 @@
       </div>
       <hr style="width:60%">
     </div>
-    <DeleteButton />
+    <DeleteRecipe />
+    <EditRecipe />
   </div>  
 </template>
 
@@ -21,12 +22,13 @@
 
 <script>
   import axios from "axios";
-  import DeleteButton from '@/components/DeleteButton.vue'
+  import DeleteRecipe from '@/components/DeleteRecipe.vue'
+  import EditRecipe from '@/components/EditRecipe.vue'
 
   export default {
     // props: ["cocktails"],
     components: {
-      DeleteButton
+      DeleteRecipe
     },  
     data: function () {
       return {
