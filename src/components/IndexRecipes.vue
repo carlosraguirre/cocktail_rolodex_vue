@@ -13,40 +13,34 @@
       </div>
       <hr style="width:60%">
     </div>
-    <DeleteRecipe />
-    <EditRecipe />
   </div>  
 </template>
 
 <hr style="width:60%">
 
 <script>
-  import axios from "axios";
-  import DeleteRecipe from '@/components/DeleteRecipe.vue'
-  import EditRecipe from '@/components/EditRecipe.vue'
+  // import axios from "axios";
 
   export default {
-    // props: ["cocktails"],
-    components: {
-      DeleteRecipe
-    },  
-    data: function () {
-      return {
-        cocktails: [],
-      };
-    },
-    created: function () {
-      this.cocktailsIndex();
-    },
-    methods: {
-      cocktailsIndex: function () {
-        console.log("in cocktails index");
-        axios.get("/cocktails").then((response) => {
-          console.log(response.data);
-          this.cocktails = response.data;
-        });
-      },      
-    },
+    props: ["cocktails"],
+ 
+    // data: function () {
+    //   return {
+    //     cocktails: [],
+    //   };
+    // },
+    // created: function () {
+    //   this.cocktailsIndex();
+    // },
+    // methods: {
+    //   cocktailsIndex: function () {
+    //     console.log("in cocktails index");
+    //     axios.get("/cocktails").then((response) => {
+    //       console.log(response.data);
+    //       this.cocktails = response.data;
+    //     });
+    //   },      
+    // },
   }
 </script>
 
