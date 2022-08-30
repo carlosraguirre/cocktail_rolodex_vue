@@ -11,7 +11,7 @@
 
     <!-- Add Recipe -->
     <div>
-      <AddRecipe />
+      <AddRecipe @addCocktail="addNewCocktail" />
     </div>
     <!-- <div>
       <transition name="modal">
@@ -98,7 +98,7 @@
         // filterValue: ""
       };
     },
-    created: function () {
+    mounted: function () {
       this.cocktailsIndex();
     //   // this.filter();
     },
@@ -106,10 +106,16 @@
       cocktailsIndex: function () {
         console.log("in cocktails index");
         axios.get("/cocktails").then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           this.cocktails = response.data;
         });
       },
+      addNewCocktail: function (cocktail) {
+        console.log("new cocktail", cocktail);
+        this.cocktails = [
+          cocktail, ...this.cocktails
+        ]
+      }
       // cocktailCreate: function () {
       //   console.log("create cocktail");
       //   var cocktailParams = {

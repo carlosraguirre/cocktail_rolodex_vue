@@ -33,7 +33,7 @@
     },
     methods: {
       cocktailCreate: function () {
-        console.log("create cocktail");
+        // console.log("create cocktail");
         var cocktailParams = {
           cocktail_name: this.newCocktailParams.cocktail_name,
           ingredient: this.newCocktailParams.ingredient,
@@ -41,8 +41,8 @@
           recipe_link: this.newCocktailParams.recipe_link,
         };
         axios.post("/cocktails", cocktailParams).then((response) => {
-          console.log(response.data);
-          this.cocktails.push(response.data);
+          // console.log(response.data);
+          this.$emit('addCocktail', response.data);
           this.newCocktailParams = {};
         });
         this.isAddModalOpen=false;
