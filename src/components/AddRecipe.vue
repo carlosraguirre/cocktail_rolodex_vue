@@ -24,7 +24,6 @@
   import axios from "axios";
 
   export default {
-    // props: [""],
     data: function () {
       return {
         newCocktailParams: {},
