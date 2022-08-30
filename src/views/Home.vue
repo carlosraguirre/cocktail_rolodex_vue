@@ -29,9 +29,10 @@
       </div>
 
       <!-- Delete Button -->
-      <!-- <div>
-        <button v-on:click="destroyCocktail(cocktail)">Delete Recipe</button>
-      </div> -->
+      <div>
+        <DeleteRecipe @deleteCocktail="deleteOldCocktail" />
+        <!-- <button v-on:click="destroyCocktail(cocktail)">Delete Recipe</button> -->
+      </div>
       <!-- Edit Recipe -->
       <!-- <div>
         <transition name="modal">
@@ -60,11 +61,13 @@
 
 <script>
   import axios from "axios";
-  import AddRecipe from '@/components/AddRecipe.vue'
+  import AddRecipe from '@/components/AddRecipe.vue';
+  import DeleteRecipe from '@/components/DeleteRecipe.vue'
 
   export default {
     components: {
       AddRecipe,
+      DeleteRecipe,
     },
     data: function () {
       return {
@@ -94,6 +97,15 @@
             // spread operator
         ];
       },
+      deleteOldCocktail: function (cocktail) {
+        console.log("delete cocktail", cocktail);
+        var index = this.cocktails.indexOf(cocktail);
+        this.cocktails.splice(index, 1);
+      },
+
+
+
+
       // updateCocktail: function() {
       //   console.log("updating Cocktail");
       //   axios.patch(`/cocktails/${this.editCocktailParams.id}`, this.editCocktailParams).then(response => {

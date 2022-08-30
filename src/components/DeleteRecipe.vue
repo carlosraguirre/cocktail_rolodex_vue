@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button v-on:click="destroyCocktail(cocktail)">Delete Recipe</button>
+    <button v-on:click="$emit('deleteCocktail')">Delete Recipe</button>
   </div>  
 </template>
 
@@ -8,19 +8,12 @@
   import axios from "axios";
 
   export default {
-    // props: ["cocktails"],
-    data: function () {
-      return {
-
-      };
-    },
     methods: {     
-      destroyCocktail: function(cocktail) {
-        console.log(cocktail);
+      destroyCocktail: function() {
+        // console.log(cocktail);
         axios.delete("/cocktails/" + cocktail.id).then((response) => {
-          console.log(response.data);
-          var index = this.cocktails.indexOf(cocktail);
-          this.cocktails.splice(index, 1);
+          // console.log(response.data);
+          this.$emit('deleteCocktail', response.data);
         });
       }
     },
