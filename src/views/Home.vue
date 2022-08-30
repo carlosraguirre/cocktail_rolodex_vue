@@ -114,8 +114,9 @@
         console.log("new cocktail", cocktail);
         this.cocktails = [
           cocktail, ...this.cocktails
-        ]
-      }
+            // spread operator
+        ];
+      },
       // cocktailCreate: function () {
       //   console.log("create cocktail");
       //   var cocktailParams = {
