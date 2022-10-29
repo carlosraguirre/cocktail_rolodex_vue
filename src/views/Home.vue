@@ -27,12 +27,16 @@
         </br>
         <a v-bind:href="cocktail.recipe_link">Link to Recipe</a>
       </div>
-
+      </br>
       <!-- Delete Button -->
       <div>
-        <DeleteRecipe @deleteCocktail="deleteOldCocktail" />
+        <DeleteRecipe @removeCocktail="deleteCocktail" />
         <!-- <button v-on:click="destroyCocktail(cocktail)">Delete Recipe</button> -->
       </div>
+
+
+
+
       <!-- Edit Recipe -->
       <!-- <div>
         <transition name="modal">
@@ -97,10 +101,9 @@
             // spread operator
         ];
       },
-      deleteOldCocktail: function (cocktail) {
-        console.log("delete cocktail", cocktail);
-        var index = this.cocktails.indexOf(cocktail);
-        this.cocktails.splice(index, 1);
+      deleteCocktail: function (cocktailId) {
+        console.log("delete cocktail", cocktailId);
+        this.cocktails = this.cocktails.filter((cocktail) => cocktail.id !== cocktailId);
       },
 
 
