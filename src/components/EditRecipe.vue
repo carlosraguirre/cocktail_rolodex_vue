@@ -23,7 +23,6 @@
   import axios from "axios";
 
   export default {
-    // props: ["cocktails"],
     data: function () {
       return {
         editCocktailParams: {},
@@ -35,6 +34,7 @@
         console.log("updating Cocktail");
         axios.patch(`/cocktails/${this.editCocktailParams.id}`, this.editCocktailParams).then(response => {
           console.log(response.data);
+          this.$emit('editRecipe', response.data);
           this.isEditModalOpen = !this.isEditModalOpen;
         });
       },

@@ -34,28 +34,10 @@
         <!-- <button v-on:click="destroyCocktail(cocktail)">Delete Recipe</button> -->
       </div>
 
-
-
-
       <!-- Edit Recipe -->
-      <!-- <div>
-        <transition name="modal">
-          <div v-if="isEditModalOpen">
-            <div class="overlay" v-on:click.self="isEditModalOpen = false;">
-              <div class="modal">
-                <p><input type="text" v-model="editCocktailParams.cocktail_name" placeholder="Name"></p>
-                <p><textarea v-model="editCocktailParams.ingredient" placeholder="Ingredients"></textarea></p>
-                <p><textarea type="text" v-model="editCocktailParams.direction" placeholder="Directions"></textarea></p>
-                <p><input type="text" v-model="editCocktailParams.recipe_link" placeholder="Link to Recipe"></p>
-                <button v-on:click="updateCocktail()">Save changes</button>
-              </div>
-            </div>
-          </div>
-        </transition>
-        <button v-on:click="editModalOpen(cocktail)">
-          {{ isEditModalOpen ? "Close" : "Edit Recipe" }}
-        </button>
-      </div> -->
+      <div>
+        <EditRecipe @editRecipe="editCocktail" />
+      </div>
       </br>
       <hr style="width:60%">
       </br>
@@ -66,12 +48,14 @@
 <script>
   import axios from "axios";
   import AddRecipe from '@/components/AddRecipe.vue';
-  import DeleteRecipe from '@/components/DeleteRecipe.vue'
+  import DeleteRecipe from '@/components/DeleteRecipe.vue';
+  import EditRecipe from '@/components/EditRecipe.vue'
 
   export default {
     components: {
       AddRecipe,
       DeleteRecipe,
+      EditRecipe,
     },
     data: function () {
       return {
@@ -105,6 +89,12 @@
         console.log("delete cocktail", cocktailId);
         this.cocktails = this.cocktails.filter((cocktail) => cocktail.id !== cocktailId);
       },
+      editCocktail: function (cocktail) {
+        console.log("edit cocktail", cocktail);
+        this.cocktails = [
+          cocktail, ...this.cocktails
+        ]
+      }
 
 
 
