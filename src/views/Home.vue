@@ -13,12 +13,15 @@
     <div>
       <AddRecipe @addCocktail="addNewCocktail" />
     </div>
+    </br>
+    </br>
     <hr style="width:60%">
 
     <!-- Recipe Component -->
     <Recipe 
       v-for="cocktail in cocktails"
-      @removeCocktail=deleteCocktail 
+      @removeCocktail=deleteCocktail
+      @editRecipe=editCocktail
       :cocktail="cocktail" 
       :key="cocktail.id" 
     />
@@ -38,8 +41,6 @@
     data: function () {
       return {
         cocktails: [],
-        // editCocktailParams: {},
-        // isEditModalOpen: false,
         // filterCocktails: {},
         // filterValue: ""
       };
@@ -69,43 +70,7 @@
       },
       editCocktail: function (cocktail) {
         console.log("edit cocktail", cocktail);
-        this.cocktails = [
-          cocktail, ...this.cocktails
-        ]
       }
-
-
-
-
-      // updateCocktail: function() {
-      //   console.log("updating Cocktail");
-      //   axios.patch(`/cocktails/${this.editCocktailParams.id}`, this.editCocktailParams).then(response => {
-      //     console.log(response.data);
-      //     this.isEditModalOpen = !this.isEditModalOpen;
-      //   });
-      // },
-      // destroyCocktail: function(cocktail) {
-      //   console.log(cocktail);
-      //   axios.delete("/cocktails/" + cocktail.id).then((response) => {
-      //     console.log(response.data);
-      //     var index = this.cocktails.indexOf(cocktail);
-      //     this.cocktails.splice(index, 1);
-      //   });
-      // },
-      // editModalOpen: function (cocktail) {
-      //   console.log(cocktail);
-      //   this.editCocktailParams = cocktail
-      //   this.isEditModalOpen = !this.isEditModalOpen;
-      // },
-      // filter: function () {
-      //   console.log(this.filterValue)
-      //   this.filterCocktails = []
-      //   this.cocktails.forEach(cocktail => {
-      //     if (cocktail.cocktail_name.includes(this.filterValue)) {
-      //       this.filterCocktails.push(cocktail)
-      //     }
-      //   });
-      // }
     },
   };
 </script>

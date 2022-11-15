@@ -20,7 +20,22 @@
 
     <!-- Edit Recipe -->
     <div>
-      <!-- <EditRecipe @editRecipe="editCocktail" /> -->
+      <transition name="modal">
+        <div v-if="isEditModalOpen">
+          <div class="overlay" v-on:click.self="isEditModalOpen = false;">
+            <div class="modal">
+              <p><input type="text" v-model="editCocktailParams.cocktail_name" placeholder="Name"></p>
+              <p><textarea v-model="editCocktailParams.ingredient" placeholder="Ingredients"></textarea></p>
+              <p><textarea type="text" v-model="editCocktailParams.direction" placeholder="Directions"></textarea></p>
+              <p><input type="text" v-model="editCocktailParams.recipe_link" placeholder="Link to Recipe"></p>
+              <button v-on:click="updateCocktail()">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </transition>
+      <button v-on:click="editModalOpen(cocktail)">
+        {{ isEditModalOpen ? "Close" : "Edit Recipe" }}
+      </button>
     </div>
     </br>
     <hr style="width:60%">
@@ -32,18 +47,38 @@
   import axios from "axios";
 
   export default {
-      emits: ['removeCocktail'],
-      props: {cocktail:{type: Object, required: true}}, 
+    emits: ['removeCocktail', 'editRecipe'],
+    props: {cocktail:{type: Object, required: true}}, 
 
-      methods: {     
-        destroyCocktail: function() {
-          axios.delete(`/cocktails/${this.cocktail.id}`).then((response) => {
-            console.log(this.cocktail.id);
-            this.$emit('removeCocktail', this.cocktail.id);        
-          });
-        }
+    data: function () {
+      return {
+        editCocktailParams: {},
+        isEditModalOpen: false,
+      };
+    },
+
+    methods: {     
+      destroyCocktail: function() {
+        axios.delete(`/cocktails/${this.cocktail.id}`).then((response) => {
+          console.log(this.cocktail.id);
+          this.$emit('removeCocktail', this.cocktail.id);        
+        });
       },
-    }
+      updateCocktail: function() {
+        console.log("updating Cocktail");
+        axios.patch(`/cocktails/${this.editCocktailParams.id}`, this.editCocktailParams).then(response => {
+          console.log(response.data);
+          this.$emit('editRecipe', response.data);
+          this.isEditModalOpen = !this.isEditModalOpen;
+        });
+      },
+      editModalOpen: function (cocktail) {
+        console.log(cocktail);
+        this.editCocktailParams = cocktail
+        this.isEditModalOpen = !this.isEditModalOpen;
+      },        
+    },
+  }
 
 </script>
 

@@ -23,6 +23,8 @@
   import axios from "axios";
 
   export default {
+    emits: ['editRecipe'],
+    
     data: function () {
       return {
         editCocktailParams: {},
