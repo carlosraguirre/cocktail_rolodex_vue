@@ -117,6 +117,9 @@
 .fadeIn-leave-active.modal {
   transform: scale(1.1);
 }
+#container {
+  text-align: center;
+}
 button {
   background-color: #04AA6D;
   border: none;
@@ -127,7 +130,7 @@ button {
   display: inline-block;
   font-size: 16px;
   margin: 4px 2px;
-  border-radius: 10px
+  border-radius: 10px;
 }
 .overlay {
   position: fixed;

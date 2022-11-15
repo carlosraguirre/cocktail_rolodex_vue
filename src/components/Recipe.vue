@@ -12,11 +12,7 @@
       <a v-bind:href="cocktail.recipe_link">Link to Recipe</a>
     </div>
     </br>
-
-    <!-- Delete Button -->
-    <div>
-      <button v-on:click="destroyCocktail()">Delete Recipe</button>
-    </div>
+    </br>
 
     <!-- Edit Recipe -->
     <div>
@@ -33,9 +29,16 @@
           </div>
         </div>
       </transition>
-      <button v-on:click="editModalOpen(cocktail)">
-        {{ isEditModalOpen ? "Close" : "Edit Recipe" }}
-      </button>
+
+      <!-- Delete & Edit Buttons -->
+      <div id="container">
+        <button v-on:click="destroyCocktail()">Delete Recipe</button> 
+        &nbsp;&nbsp;&nbsp;
+        <button v-on:click="editModalOpen(cocktail)">
+          {{ isEditModalOpen ? "Close" : "Edit Recipe" }}
+        </button>
+      </div>
+
     </div>
     </br>
     <hr style="width:60%">
@@ -81,4 +84,3 @@
   }
 
 </script>
-
