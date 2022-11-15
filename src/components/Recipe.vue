@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- Recipe Index -->
     <h2>{{ cocktail.cocktail_name}}</h2>
     <div id="original">
       <h4>Ingredients</h4>
@@ -11,9 +12,9 @@
       <a v-bind:href="cocktail.recipe_link">Link to Recipe</a>
     </div>
     </br>
+
     <!-- Delete Button -->
     <div>
-      <!-- <DeleteRecipe @removeCocktail="deleteCocktail(cocktail)" /> -->
       <button v-on:click="destroyCocktail()">Delete Recipe</button>
     </div>
 
@@ -29,14 +30,8 @@
 
 <script>
   import axios from "axios";
-  import DeleteRecipe from '@/components/DeleteRecipe.vue';
-  import EditRecipe from '@/components/EditRecipe.vue';
 
   export default {
-      // components: {
-      //     DeleteRecipe,
-      //     EditRecipe,
-      //   },
       emits: ['removeCocktail'],
       props: {cocktail:{type: Object, required: true}}, 
 
@@ -44,9 +39,7 @@
         destroyCocktail: function() {
           axios.delete(`/cocktails/${this.cocktail.id}`).then((response) => {
             console.log(this.cocktail.id);
-            this.$emit('removeCocktail', this.cocktail.id);
-            // var index = this.cocktails.indexOf(cocktail);
-            // this.cocktails.splice(index, 1);          
+            this.$emit('removeCocktail', this.cocktail.id);        
           });
         }
       },

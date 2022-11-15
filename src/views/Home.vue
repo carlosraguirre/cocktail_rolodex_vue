@@ -15,7 +15,7 @@
     </div>
     <hr style="width:60%">
 
-    <!-- Cocktails Index -->
+    <!-- Recipe Component -->
     <Recipe 
       v-for="cocktail in cocktails"
       @removeCocktail=deleteCocktail 

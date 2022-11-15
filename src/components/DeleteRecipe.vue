@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button v-on:click="destroyCocktail()">Delete Recipe</button>
+    <!-- <button v-on:click="destroyCocktail()">Delete Recipe</button> -->
   </div>  
 </template>
 
@@ -15,9 +15,7 @@
         console.log(this);
         axios.delete(`/cocktails/${cocktail.id}`).then((response) => {
           console.log(cocktail.id);
-          this.$emit('removeCocktail', cocktail.id);
-          // var index = this.cocktails.indexOf(cocktail);
-          // this.cocktails.splice(index, 1);          
+          this.$emit('removeCocktail', cocktail.id);          
         });
       }
     },
