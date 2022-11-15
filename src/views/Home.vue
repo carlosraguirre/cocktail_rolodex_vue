@@ -16,46 +16,24 @@
     <hr style="width:60%">
 
     <!-- Cocktails Index -->
-    <div v-for="cocktail in cocktails">
-      <h2>{{ cocktail.cocktail_name}}</h2>
-      <div id="original">
-        <h4>Ingredients</h4>
-        <div class="pre-formatted">{{ cocktail.ingredient }}</div>
-        </br>
-        <h4>Directions</h4>
-        <div class="pre-formatted">{{ cocktail.direction }}</div>
-        </br>
-        <a v-bind:href="cocktail.recipe_link">Link to Recipe</a>
-      </div>
-      </br>
-      <!-- Delete Button -->
-      <div>
-        <DeleteRecipe @removeCocktail="deleteCocktail" />
-        <!-- <button v-on:click="destroyCocktail(cocktail)">Delete Recipe</button> -->
-      </div>
-
-      <!-- Edit Recipe -->
-      <div>
-        <EditRecipe @editRecipe="editCocktail" />
-      </div>
-      </br>
-      <hr style="width:60%">
-      </br>
+    <Recipe 
+      v-for="cocktail in cocktails"
+      @removeCocktail=deleteCocktail 
+      :cocktail="cocktail" 
+      :key="cocktail.id" 
+    />
     </div>
-  </div>
 </template>
 
 <script>
   import axios from "axios";
-  import AddRecipe from '@/components/AddRecipe.vue';
-  import DeleteRecipe from '@/components/DeleteRecipe.vue';
-  import EditRecipe from '@/components/EditRecipe.vue'
+  import Recipe from '@/components/Recipe.vue'
+  import AddRecipe from '@/components/AddRecipe.vue'
 
   export default {
     components: {
       AddRecipe,
-      DeleteRecipe,
-      EditRecipe,
+      Recipe
     },
     data: function () {
       return {
