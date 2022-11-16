@@ -1,13 +1,21 @@
 <template>
   <div id="app">
     <!-- Search Bar -->
-    <!-- <div>
-      <input class="form-control" type="text" v-model="filterValue" placeholder="search cocktails">
+    <div class="search-wrapper">
+      <input type="text" v-model="search" placeholder="Search.."/>
+        <!-- <label>Search:</label> -->
+
+      <!-- <input type="text" v-model="search">
+      <div v-for="cocktail in filteredCocktail" :key="cocktail.id">
+        <cocktail :cocktail="cocktail"></cocktail>
+      </div> -->
+
+      <!-- <input class="form-control" type="text" v-model="filterValue" placeholder="search cocktails">
       <button v-on:click="filter()">Search</button>
       <div v-for ="cocktail in filterCocktails">
         <h5>{{ cocktail.cocktail_name }}</h5>
-      </div>
-    </div> -->
+      </div> -->
+    </div>
 
     <!-- Add Recipe -->
     <div>
@@ -41,13 +49,18 @@
     data: function () {
       return {
         cocktails: [],
-        // filterCocktails: {},
-        // filterValue: ""
+        search: "",
       };
     },
     mounted: function () {
       this.cocktailsIndex();
-    //   // this.filter();
+
+    },
+    computed: {
+      cocktail() {
+        return this.cocktail.filter(cocktail => {
+        return cocktail.ingredient.toLowerCase().includes(this.search.toLowerCase())});
+      }
     },
     methods: {
       cocktailsIndex: function () {

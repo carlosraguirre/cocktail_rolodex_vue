@@ -51,7 +51,7 @@
 
   export default {
     emits: ['removeCocktail', 'editRecipe'],
-    props: {cocktail:{type: Object, required: true}}, 
+    props: {cocktail:{type: Object, required: true}},
 
     data: function () {
       return {
