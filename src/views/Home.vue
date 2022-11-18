@@ -1,21 +1,22 @@
 <template>
   <div id="app">
     <!-- Search Bar -->
-    <div class="search-wrapper">
-      <input type="text" v-model="search" placeholder="Search.."/>
-        <!-- <label>Search:</label> -->
+    <!-- <div class="search-wrapper"> -->
+      <!-- <input type="text" v-model="search" placeholder="Search.."/> -->
 
       <!-- <input type="text" v-model="search">
       <div v-for="cocktail in filteredCocktail" :key="cocktail.id">
         <cocktail :cocktail="cocktail"></cocktail>
       </div> -->
 
-      <!-- <input class="form-control" type="text" v-model="filterValue" placeholder="search cocktails">
+      <!-- <input class="form-control" type="text" placeholder="search cocktails">
       <button v-on:click="filter()">Search</button>
-      <div v-for ="cocktail in filterCocktails">
+      <div v-for ="cocktail in filterCocktail">
         <h5>{{ cocktail.cocktail_name }}</h5>
       </div> -->
-    </div>
+
+      
+    <!-- </div> -->
 
     <!-- Add Recipe -->
     <div>
@@ -23,17 +24,19 @@
     </div>
     </br>
     </br>
+    <input type="text" v-model="search">
+
     <hr style="width:60%">
 
     <!-- Recipe Component -->
-    <Recipe 
-      v-for="cocktail in cocktails"
+    <Recipe
+      v-for="cocktail in cocktailCarlos"
       @removeCocktail=deleteCocktail
       @editRecipe=editCocktail
       :cocktail="cocktail" 
       :key="cocktail.id" 
     />
-    </div>
+  </div>
 </template>
 
 <script>
@@ -57,9 +60,15 @@
 
     },
     computed: {
-      cocktail() {
-        return this.cocktail.filter(cocktail => {
-        return cocktail.ingredient.toLowerCase().includes(this.search.toLowerCase())});
+      cocktailCarlos() {
+        return this.cocktails.filter(cocktail => 
+          cocktail.ingredient.toLowerCase().includes(this.search.toLowerCase())
+        );
+      },
+      filterCocktails() {
+        return this.cocktails.filter(cocktail =>
+          cocktail.ingredient.toLowerCase().includes(this.search.toLowerCase())
+        );
       }
     },
     methods: {
