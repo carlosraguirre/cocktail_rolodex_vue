@@ -1,36 +1,21 @@
 <template>
   <div id="app">
-    <!-- Search Bar -->
-    <!-- <div class="search-wrapper"> -->
-      <!-- <input type="text" v-model="search" placeholder="Search.."/> -->
-
-      <!-- <input type="text" v-model="search">
-      <div v-for="cocktail in filteredCocktail" :key="cocktail.id">
-        <cocktail :cocktail="cocktail"></cocktail>
-      </div> -->
-
-      <!-- <input class="form-control" type="text" placeholder="search cocktails">
-      <button v-on:click="filter()">Search</button>
-      <div v-for ="cocktail in filterCocktail">
-        <h5>{{ cocktail.cocktail_name }}</h5>
-      </div> -->
-
-      
-    <!-- </div> -->
-
-    <!-- Add Recipe -->
     <div>
+      <!-- Search Bar -->
+      </br>
+      <input type="text" v-model="search" placeholder="Search..">
+      </br>
+      </br>
+      
+      <!-- Add Recipe -->
       <AddRecipe @addCocktail="addNewCocktail" />
     </div>
     </br>
-    </br>
-    <input type="text" v-model="search">
-
     <hr style="width:60%">
 
     <!-- Recipe Component -->
     <Recipe
-      v-for="cocktail in cocktailCarlos"
+      v-for="cocktail in cocktailList"
       @removeCocktail=deleteCocktail
       @editRecipe=editCocktail
       :cocktail="cocktail" 
@@ -60,7 +45,7 @@
 
     },
     computed: {
-      cocktailCarlos() {
+      cocktailList() {
         return this.cocktails.filter(cocktail => 
           cocktail.ingredient.toLowerCase().includes(this.search.toLowerCase())
         );
