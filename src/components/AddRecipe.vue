@@ -6,7 +6,7 @@
           <div class="modal">
             <h1>Add Cocktail</h1>
             <p><input type="text" v-model="newCocktailParams.cocktail_name" placeholder="Name"></p>
-            <p><textarea type="text" v-model="newCocktailParams.ingredient" placeholder="Ingredients"></textarea></p>
+            <p><textarea v-model="newCocktailParams.ingredient" placeholder="Ingredients"></textarea></p>
             <p><textarea type="text" v-model="newCocktailParams.direction" placeholder="Directions"></textarea></p>
             <p><input type="text" v-model="newCocktailParams.recipe_link" placeholder="Link to Recipe"></p>
             <button v-on:click="cocktailCreate()">Add recipe</button>
