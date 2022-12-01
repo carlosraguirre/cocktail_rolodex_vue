@@ -1,7 +1,6 @@
 <template>
   <div>
     <!-- Recipe Index -->
-
     <h2>{{ cocktail.cocktail_name}}</h2>
     <div id="original">
       <h4>Ingredients</h4>
